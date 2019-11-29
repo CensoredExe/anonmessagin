@@ -1,0 +1,17 @@
+$primary-red: rgb(151, 0, 0);
+$secondary-red: rgb(119, 19, 1);
+$primary-yellow: rgb(255, 233, 32);
+$secondary-yellow: rgb(146, 146, 0);
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: sans-serif;
+    background-attachment: fixed;
+    background-size: cover;
+    background: linear-gradient(to bottom right, $primary-red 50%, $primary-yellow 50%);
+    background-position: center;
+}
