@@ -1,3 +1,3 @@
 <?php
-    $conn = mysqli_query("localhost", "root", "", "anonmessaging");
+    $conn = mysqli_connect("localhost", "root", "", "anonmessaging");
 ?>

@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if(isset($_SESSION['user_id'])){
+        header("Location: dashboard/");
+    }
+    include_once "includes/connection.php";
+    include_once "includes/functions.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +35,7 @@
         </div>
         <div class="extra">
         <h3>Some extra info</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi deserunt recusandae provident numquam ullam, molestiae, ipsam nam dolore sit possimus enim. Placeat aliquid quo consequuntur quam? Autem odio porro facilis!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam sed totam consequatur molestiae cumque laboriosam ducimus numquam, temporibus maiores inventore? Laudantium eius maiores harum nam aliquam odio praesentium doloremque accusantium.</p>
         </div>
     </div>
     <div class="second-col col">
@@ -39,8 +48,49 @@
         <input type="text" name="user_name" id="user_name" placeholder="John Doe" required>
         <label for="user_password">Password</label>
         <input type="password" name="user_password" id="user_password" placeholder="***********" required>
+        <label for="user_password_conf">Confirm password</label>
+        <input type="password" name="user_password_conf" id="user_password_conf" placeholder="***********" required>
         <button type="submit" name="submit" class="submit-btn">Signup</button>
-        </form>
+        </form><br>
+        <a href="login/">Already have an account?</a>
+        <?php
+        if(isset($_POST['submit'])){
+            $user_email = htmlspecialchars($_POST['user_email']);
+            $user_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['user_name']));
+            $user_password = $_POST['user_password'];
+            $user_password_conf = $_POST['user_password_conf'];
+            if(empty($user_email) || empty($user_name) || empty($user_password) || empty($user_password_conf)){
+                // Error, empty values
+                echo "Error, empty values";
+                exit();
+            }
+            if(!filter_var($user_email, FILTER_VALIDATE_EMAIL)){
+                echo "Error, invalid email";
+                exit();
+            }
+            if($user_password_conf != $user_password){
+                echo "Passwords dont match";
+            }else {
+                // Check if account exists
+                $sql = "SELECT * FROM `users` WHERE `user_email` = '$user_email'";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                    //Account exists
+                    echo "Error, account with this email already exists";
+                    exit();
+                }else {
+                    $hash = password_hash($user_password, PASSWORD_DEFAULT);
+                    // Account doesnt exist
+                    $sql = "INSERT INTO `users` (`user_email`, `user_name`, `user_password`,`user_bio`, `user_pfp`, `user_type`) VALUES ('$user_email', '$user_name', '$hash', 'User hasnt entered a bio', 'uploads/default.png')";
+                    if(mysqli_query($conn, $sql)){
+                        echo "Account made";
+                    }
+                }
+            }
+
+
+        }
+        ?>
     </div>
     </div>
 </div>

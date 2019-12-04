@@ -13,6 +13,11 @@ body {
   background-position: center;
 }
 
+a {
+  color: #00a2ff;
+  text-decoration: none;
+}
+
 .main-hold {
   width: 80%;
   margin: 0 auto;
@@ -32,7 +37,7 @@ body {
 }
 
 .login-form {
-  margin-top: 30%;
+  margin-top: 15%;
   padding: 20px;
   width: 100%;
   border-radius: 8px;
@@ -100,6 +105,9 @@ h3 {
     margin-bottom: 20px;
     width: 100%;
     display: block;
+  }
+  .hero-box h1 {
+    font-size: 25px;
   }
 }
 /*# sourceMappingURL=style.css.map */

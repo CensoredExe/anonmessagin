@@ -15,6 +15,10 @@ body {
     background: $primary-yellow;
     background-position: center;
 }
+a {
+    color: rgb(0, 162, 255);
+    text-decoration: none;
+}
 .main-hold {
     
     width: 80%;
@@ -33,7 +37,7 @@ body {
     float:right;
 }
 .login-form {
-    margin-top: 30%;
+    margin-top: 15%;
     padding: 20px;
     width: 100%;
     border-radius: 8px;
@@ -94,5 +98,10 @@ h3 {
         margin-bottom: 20px;
         width: 100%;
         display: block;
+    }
+    .hero-box {
+        h1 {
+            font-size: 25px;
+        }
     }
 }
