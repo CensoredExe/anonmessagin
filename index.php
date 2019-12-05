@@ -55,7 +55,7 @@
         <a href="login/">Already have an account?</a>
         <?php
         if(isset($_POST['submit'])){
-            $user_email = htmlspecialchars($_POST['user_email']);
+            $user_email = htmlspecialchars(mysqli_real_escape_string($conn,$_POST['user_email']));
             $user_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['user_name']));
             $user_password = $_POST['user_password'];
             $user_password_conf = $_POST['user_password_conf'];
@@ -81,9 +81,11 @@
                 }else {
                     $hash = password_hash($user_password, PASSWORD_DEFAULT);
                     // Account doesnt exist
-                    $sql = "INSERT INTO `users` (`user_email`, `user_name`, `user_password`,`user_bio`, `user_pfp`, `user_type`) VALUES ('$user_email', '$user_name', '$hash', 'User hasnt entered a bio', 'uploads/default.png')";
+                    $sql = "INSERT INTO `users` (`user_email`, `user_name`, `user_password`,`user_bio`, `user_pfp`, `user_type`) VALUES ('$user_email', '$user_name', '$hash', 'User hasnt entered a bio', 'uploads/default.png', 'user');";
                     if(mysqli_query($conn, $sql)){
                         echo "Account made";
+                    }else {
+                        echo "Error, account not made.";
                     }
                 }
             }
