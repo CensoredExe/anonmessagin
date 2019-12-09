@@ -8,6 +8,7 @@ $secondary-yellow: rgb(194, 194, 0);
     padding: 0;
     margin: 0;
 }
+
 body {
     font-family: sans-serif;
     background-attachment: fixed;
@@ -15,27 +16,32 @@ body {
     background: $primary-yellow;
     background-position: center;
 }
+
 a {
     color: rgb(0, 162, 255);
     text-decoration: none;
 }
+
 .main-hold {
-    
+
     width: 80%;
     margin: 0 auto;
     margin-top: 5%;
     position: relative;
 
 }
+
 .first-col {
     position: relative;
     width: 55%;
     display: inline-block;
 }
+
 .second-col {
     width: 40%;
-    float:right;
+    float: right;
 }
+
 .login-form {
     margin-top: 15%;
     padding: 20px;
@@ -44,6 +50,7 @@ a {
     background-color: rgb(247, 246, 246);
     box-shadow: 4px 4px 6px rgba(51, 51, 51, 0.719);
     border: 2px solid $secondary-yellow;
+
     input {
         display: block;
         padding: 10px;
@@ -54,16 +61,19 @@ a {
         width: 100%;
         margin-bottom: 10px;
     }
+
     label {
         display: block;
         font-size: 20px;
         font-weight: 100;
     }
+
     .form-title {
         font-weight: 100;
         font-size: 30px;
         margin-bottom: 10px;
     }
+
     .submit-btn {
         width: 100%;
         padding: 10px;
@@ -71,27 +81,33 @@ a {
         border: 2px solid rgb(59, 59, 59);
         font-size: 24px;
         margin-top: 20px;
+
         &:hover {
             cursor: pointer;
         }
 
     }
 }
+
 .hero-box {
     h1 {
         font-weight: 100;
         font-size: 50px;
     }
 }
+
 h3 {
     font-weight: 100;
 }
+
 .features-box {
     margin-top: 10%;
 }
+
 .extra {
     margin-top: 10%;
 }
+
 .form-hold {
     position: absolute;
     top: 35%;
@@ -99,20 +115,22 @@ h3 {
     width: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow:auto;
+    overflow: auto;
+
     a {
         text-align: left;
         display: block;
         margin-top: 5px;
     }
+
     form {
         text-align: none;
         padding: 10px;
         border-radius: 8px;
         width: 100%;
         margin: 10px auto;
-        background-color: rgb(248, 248, 248); 
-        
+        background-color: rgb(248, 248, 248);
+
         input {
             width: 100%;
             padding: 10px;
@@ -122,12 +140,14 @@ h3 {
             display: block;
             margin-bottom: 10px;
         }
+
         label {
             text-align: left;
             font-size: 20px;
             display: block;
             margin-bottom: 5px;
         }
+
         button {
             width: 100%;
             padding: 10px;
@@ -135,6 +155,7 @@ h3 {
             border: 2px solid rgb(59, 59, 59);
             font-size: 24px;
             margin-top: 10px;
+
             &:hover {
                 cursor: pointer;
             }
@@ -142,21 +163,50 @@ h3 {
     }
 }
 
-@media (max-width: 700px){
+// Dashboard main page
+
+.main-column {
+    width: 60%;
+    margin: 20px auto;
+    padding: 20px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgba(255, 166, 0, 0.472);
+    box-sizing: border-box;
+}
+.right-column {
+    box-sizing: border-box;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 17%;
+    background-color:rgba(255, 166, 0, 0.472);
+    border-radius: 10px;
+    padding: 10px;
+    ul {
+        li {
+            list-style: none;
+        }
+    }
+}
+@media (max-width: 700px) {
     .col {
         margin-bottom: 20px;
         width: 100%;
         display: block;
     }
+
     .hero-box {
         h1 {
             font-size: 25px;
         }
     }
+
     .form-hold {
         h1 {
             font-size: 18px;
         }
+
         width: 70%;
     }
 }
