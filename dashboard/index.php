@@ -24,10 +24,38 @@
             <p>Welcome back, <?php echo $_SESSION['user_name']; ?></p>
             <p>AnonScore: <?php echo checkPoints($_SESSION['user_id']); ?></p><br>
             <hr><br>
-            <h2 style="font-weight:300;">You currently have no messages open, start one.</h2><br>
-            <a href="../users">Search for users</a>
-            <?php
             
+            <?php
+                $id = $_SESSION['user_id'];
+                $sql = "SELECT * FROM `conversations` WHERE `conv_sender`='$id' OR `conv_recipient`='$id' ORDER BY `conv_id` DESC";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) == 0){
+                    // No conversations open
+                    ?>
+                    <h2 style="font-weight:300;">You currently have no messages open, start one.</h2><br>
+                    <a href="../users/index.php">Search for users</a>
+                    <?php
+                }else {
+                    ?>
+                    <h2 style="font-weight:300;">Open conversations:</h2><br>
+                    <?php
+                    while($row = mysqli_fetch_assoc($result)){
+                        if($row['conv_sender'] == $_SESSION['user_id']){
+                            $name = $row['conv_recipient'];
+                        }else {
+                            $name = $row['conv_sender'];
+                        }
+                        
+                        ?>
+                        <a style="color:#000;" href="../chat/index.php?id=<?php echo $row['conv_id']; ?>">
+                        <div class="conversation">
+                            <h2 style="font-weight:300;"><?php echo findName($name); ?></h2>
+                            <p><?php echo findEmail($name); ?></p>
+                        </div>
+                        </a>
+                        <?php
+                    }
+                }
             ?>
         </div>
         <div class="right-column">

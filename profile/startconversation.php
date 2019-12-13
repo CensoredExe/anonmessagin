@@ -10,8 +10,9 @@
         $recipient = mysqli_real_escape_string($conn, $_GET['recipient']);
         if($sender == $recipient){
             echo "<script>window.location = '../index.php'</script>";
+            exit();
         }
-        $sql = "SELECT * FROM `conversations` WHERE `conv_sender` = '$sender' AND `conv_recipient`='$recipient'";
+        $sql = "SELECT * FROM `conversations` WHERE `conv_sender` = '$sender' AND `conv_recipient`='$recipient' OR `conv_sender` = '$recipient' AND `conv_recipient` ='$sender'";
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) > 0){
             // Conv already exists.
@@ -21,10 +22,11 @@
             echo "<script>window.location = '$url'</script>";
             exit();
         } 
-        $sql = "INSERT INTO `conversations` (`conv_sender`, `conv_recipient`) VALUES ('$sender', '$recipient')";
+        $sql = "INSERT INTO `conversations` (`conv_sender`, `conv_recipient`, `most_recent`) VALUES ('$sender', '$recipient', 'none')";
         if(mysqli_query($conn, $sql)){
             echo "<script>window.location='../dashboard/'</script>";
-
+            addPoints($_SESSION['user_id'], 5);
+            addPoints($recipient, 3);
         }else {
             echo "Error";
         }

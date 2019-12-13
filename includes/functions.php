@@ -31,4 +31,32 @@
             echo "Error";
         }
     }
+
+    // Find username
+    function findName($id){
+        global $conn;
+        $sql = "SELECT * FROM `users` WHERE `user_id` = '$id'";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) == 0){
+            echo "Error";
+        }
+        while($row = mysqli_fetch_assoc($result)){
+            $name = $row['user_name'];
+        }
+        return $name;
+    }
+    
+    // Find email
+    function findEmail($id){
+        global $conn;
+        $sql = "SELECT * FROM `users` WHERE `user_id` = '$id'";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) == 0){
+            echo "Error";
+        }
+        while($row = mysqli_fetch_assoc($result)){
+            $email = $row['user_email'];
+        }
+        return $email;
+    }
 ?>
