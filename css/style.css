@@ -37,7 +37,7 @@ a {
 }
 
 .login-form {
-  margin-top: 15%;
+  margin-top: 10%;
   padding: 20px;
   width: 100%;
   border-radius: 8px;
@@ -183,6 +183,21 @@ h3 {
   list-style: none;
 }
 
+.search-bar {
+  padding: 10px;
+  width: 100%;
+  font-size: 20px;
+}
+
+.user_div {
+  width: 100%;
+  margin: 10px auto;
+  background-color: rgba(255, 255, 255, 0.925);
+  border-radius: 4px;
+  padding: 8px;
+  border: 2px solid #ffe920;
+}
+
 @media (max-width: 700px) {
   .col {
     margin-bottom: 20px;
@@ -197,6 +212,17 @@ h3 {
   }
   .form-hold h1 {
     font-size: 18px;
+  }
+  .btn-title {
+    font-size: 18px !important;
+  }
+  .user_email {
+    font-size: 14px !important;
+    word-break: break-all;
+  }
+  .user_name {
+    font-size: 28px !important;
+    word-break: break;
   }
 }
 /*# sourceMappingURL=style.css.map */

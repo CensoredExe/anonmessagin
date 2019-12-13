@@ -81,7 +81,7 @@
                 }else {
                     $hash = password_hash($user_password, PASSWORD_DEFAULT);
                     // Account doesnt exist
-                    $sql = "INSERT INTO `users` (`user_email`, `user_name`, `user_password`,`user_bio`, `user_pfp`, `user_type`) VALUES ('$user_email', '$user_name', '$hash', 'User hasnt entered a bio', 'uploads/default.png', 'user');";
+                    $sql = "INSERT INTO `users` (`user_email`, `user_name`, `user_password`,`user_bio`, `user_pfp`, `user_type`, `user_points`) VALUES ('$user_email', '$user_name', '$hash', 'User hasnt entered a bio', 'uploads/default.png', 'user', '0');";
                     if(mysqli_query($conn, $sql)){
                         echo "Account made";
                     }else {

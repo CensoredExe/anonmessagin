@@ -44,6 +44,7 @@
                             $_SESSION['user_email'] = $row['user_email'];
                             $_SESSION['user_bio'] = $row ['user_bio'];
                             $_SESSION['user_type'] = $row['user_type'];
+                            addPoints($_SESSION['user_id'], 3);
                             header("Location: ../dashboard/");
                         }else {
                             // Password is incorrect

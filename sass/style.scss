@@ -30,20 +30,17 @@ a {
     position: relative;
 
 }
-
 .first-col {
     position: relative;
     width: 55%;
     display: inline-block;
 }
-
 .second-col {
     width: 40%;
     float: right;
 }
-
 .login-form {
-    margin-top: 15%;
+    margin-top: 10%;
     padding: 20px;
     width: 100%;
     border-radius: 8px;
@@ -189,6 +186,20 @@ h3 {
         }
     }
 }
+.search-bar {
+    padding: 10px;
+    width: 100%;
+    font-size: 20px;
+}
+.user_div {
+    width: 100%;
+    margin: 10px auto;
+    background-color: rgba(255, 255, 255, 0.925);
+    border-radius: 4px;
+    padding: 8px;
+    border: 2px solid $primary-yellow;
+    
+}
 @media (max-width: 700px) {
     .col {
         margin-bottom: 20px;
@@ -208,5 +219,16 @@ h3 {
         }
 
         width: 70%;
+    }
+    .btn-title {
+        font-size: 18px !important;
+    }
+    .user_email {
+        font-size: 14px !important;
+        word-break: break-all;
+    }
+    .user_name {
+        font-size: 28px !important;
+        word-break: break;
     }
 }

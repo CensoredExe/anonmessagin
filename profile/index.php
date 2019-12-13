@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="main-column">
-    <a style="color: #000;text-align:center;" href="../users/index.php"><h1 style="font-weight:100;margin-bottom:20px;">AnonMessaging</h1></a>
+    <a style="color: #000;text-align:center;" href="../users/index.php"><h1 class="btn-title" style="font-weight:100;margin-bottom:20px;">AnonMessaging</h1></a><hr><br>
     <?php 
     $id = mysqli_real_escape_string($conn, $_GET['id']);
     $sql = "SELECT * FROM `users` WHERE `user_id`='$id' LIMIT 1";
@@ -29,8 +29,22 @@
     }else {
         while($row = mysqli_fetch_assoc($result)){
             ?>
-            <h1><?php echo $row['user_name']; ?></h1>
-            <p><?php echo $row['user_email']; ?></p>
+            <center>
+            <?php
+            if($row['user_type'] == 'admin'){
+                ?>
+                <p style="margin:none;margin-top:-10px;color:red;font-weight:700;">Admin Account</p>
+                <?php
+            }
+            ?>
+            <h1 class="user_name" style="font-weight:300;"><?php echo $row['user_name']; ?></h1>
+            <p class="user_email"><?php echo $row['user_email']; ?></p>
+            <br><hr><br>
+            <h3>User Points: <?php echo checkPoints($row['user_id']); ?></h3>
+            <br><hr><br>
+            <p>Click the message button to begin a conversation with this user!</p>
+            <a class="addConv" href="startconversation.php?sender=<?php echo $_SESSION['user_id'] ?>&recipient=<?php echo $row['user_id']; ?>">Message</a>
+            </center>
             <?php
         }
     }
