@@ -248,6 +248,16 @@ h3 {
 }
 
 @media (max-width: 700px) {
+  .message .msg-info {
+    height: 30%;
+    width: 100%;
+    display: block;
+  }
+  .message .msg-content {
+    margin-top: 30px;
+    width: 100%;
+    display: block;
+  }
   .col {
     margin-bottom: 20px;
     width: 100%;
@@ -272,6 +282,12 @@ h3 {
   .user_name {
     font-size: 28px !important;
     word-break: break;
+  }
+  .right-column {
+    display: none;
+  }
+  .main-column {
+    word-break: break-all;
   }
 }
 /*# sourceMappingURL=style.css.map */

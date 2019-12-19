@@ -26,7 +26,8 @@
         $name = $sender;
     }
     $user_id = $_SESSION['user_id'];
-
+    $sql2 = "DELETE FROM `unread` WHERE `read_conv`='$id' AND `read_user`='$user_id'";
+    mysqli_query($conn, $sql2);
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +61,8 @@
             if(mysqli_query($conn, $sql)){
                 $url = "index.php?id='$id'";
                 addPoints($_SESSION['user_id'], 2);
+                addPoints($name, 1);
+                addUnread($name, $id , $content);
                 echo "<script>window.location= window.location</script>";
                 
                 

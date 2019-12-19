@@ -59,4 +59,10 @@
         }
         return $email;
     }
+    // Add unread message
+    function addUnread($id, $conv_id, $msg){
+        global $conn;
+        $sql = "INSERT INTO `unread` (`read_conv`, `read_user`, `read_msg`) VALUES ('$conv_id', '$id', '$msg')";
+        mysqli_query($conn, $sql);
+    }
 ?>

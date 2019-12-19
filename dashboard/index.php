@@ -39,18 +39,42 @@
                     ?>
                     <h2 style="font-weight:300;">Open conversations:</h2><br>
                     <?php
+                    
                     while($row = mysqli_fetch_assoc($result)){
+
                         if($row['conv_sender'] == $_SESSION['user_id']){
                             $name = $row['conv_recipient'];
                         }else {
                             $name = $row['conv_sender'];
                         }
-                        
+                        $convid = $row['conv_id'];
+                        $user_id = $_SESSION['user_id'];
+                        $sql2 = "SELECT * FROM `unread` WHERE `read_conv`='$convid' AND `read_user`='$user_id'";
+                        $unread = False;
+                        $result2 = mysqli_query($conn, $sql2);
+                        if(mysqli_num_rows($result2) > 0){
+                            // Unread messages with user
+                            $unread = True;
+                            $num_of_messages = mysqli_num_rows($result2);
+                            $sql3 = "SELECT * FROM `unread` WHERE `read_conv`='$convid' AND `read_user`='$user_id' ORDER BY `read_id` DESC LIMIT 1";
+                            $result3 = mysqli_query($conn, $sql3);
+                            while ($row2 = mysqli_fetch_assoc($result3)){
+                                $message = $row2['read_msg'];
+                                $message = substr($message, 0, 45);
+                            }
+                        }
                         ?>
-                        <a style="color:#000;" href="../chat/index.php?id=<?php echo $row['conv_id']; ?>">
+                        <a style="color:#000;<?php if($unread == True){echo "color:darkblue; !important"; } ?>" href="../chat/index.php?id=<?php echo $row['conv_id']; ?>">
                         <div class="conversation">
                             <h2 style="font-weight:300;"><?php echo findName($name); ?></h2>
                             <p><?php echo findEmail($name); ?></p>
+                            <?php
+                            if($unread == True){
+                                ?>
+                                <p style="color:blue;"><?php echo $num_of_messages ?> Unread: <?php echo $message ?>.....</p>
+                                <?php
+                            }
+                            ?>
                         </div>
                         </a>
                         <?php
