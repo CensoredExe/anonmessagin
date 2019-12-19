@@ -1,7 +1,7 @@
 $primary-red: rgb(151, 0, 0);
 $secondary-red: rgb(119, 19, 1);
-$primary-yellow: rgb(255, 233, 32);
-$secondary-yellow: rgb(194, 194, 0);
+$primary-yellow: rgb(199, 199, 199);
+$secondary-yellow: rgb(255, 255, 255);
 
 * {
     box-sizing: border-box;
@@ -13,7 +13,7 @@ body {
     font-family: sans-serif;
     background-attachment: fixed;
     background-size: cover;
-    background: $primary-yellow;
+    background-image: linear-gradient(to bottom right, rgb(114, 114, 114), rgb(102, 102, 102));
     background-position: center;
 }
 
@@ -168,7 +168,7 @@ h3 {
     padding: 20px;
     height: 100%;
     border-radius: 10px;
-    background-color: rgba(255, 166, 0, 0.472);
+    background-color: $secondary-yellow;
     box-sizing: border-box;
 }
 .right-column {
@@ -177,7 +177,7 @@ h3 {
     right: 20px;
     top: 20px;
     width: 17%;
-    background-color:rgba(255, 166, 0, 0.472);
+    background-color:$secondary-yellow;
     border-radius: 10px;
     padding: 10px;
    

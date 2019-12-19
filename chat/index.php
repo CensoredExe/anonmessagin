@@ -42,7 +42,7 @@
 <body>
     <div class="main-column">
     <a style="color: #000;text-align:center;" href="../"><h1 style="font-weight:100;margin-bottom:20px;">AnonMessaging</h1></a>
-        <h1 style="font-weight:300;">Conversation with: <?php echo findName($name); ?></h1>
+        <h1 style="font-weight:300;">Conversation with:<u><a style="color: #000;" href="../profile/index.php?id=<?php echo $name; ?>"> <?php echo findName($name); ?></a></u></h1>
         <br><hr><br>
         <form method="POST">
             <textarea name="msg_content" class="msg_textarea" required placeholder="Enter your message"></textarea>
@@ -84,7 +84,9 @@
             <div class="msg-info">
                 
             <a style="color:#000;" href="../profile/index.php?id=<?php echo $row['msg_author']; ?>"><h3 style="font-weight:300;"><?php echo findName($row['msg_author']); ?></h3></a>
+            <p><?php echo $row['msg_date']; ?></p>
             <p>User Points: <?php echo checkPoints($row['msg_author']); ?></p>
+            
             </div>
             
             <div class="msg-content"?>

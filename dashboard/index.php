@@ -36,7 +36,11 @@
                     <a href="../users/index.php">Search for users</a>
                     <?php
                 }else {
+                    $sqlunreadtotal = "SELECT * FROM `unread` WHERE `read_user`='$id'";
+                    $resulttotal = mysqli_query($conn, $sqlunreadtotal);
+                    $num_of_unread = mysqli_num_rows($resulttotal);
                     ?>
+                    <p>You have <?php echo $num_of_unread; ?> unread messages</p>
                     <h2 style="font-weight:300;">Open conversations:</h2><br>
                     <?php
                     
