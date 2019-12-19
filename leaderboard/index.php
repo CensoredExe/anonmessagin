@@ -19,14 +19,14 @@
 <body>
     <div class="main-column">
     <a style="color: #000;text-align:center;" href="../"><h1 style="font-weight:100;margin-bottom:20px;">AnonMessaging</h1></a>
-    <h1>See a list of users, or search for them.</h1>
+    <h1>Leaderboard</h1>
         <form method="GET" action="search.php">
             <input class="search-bar" type="search" name="search" placeholder="Search for username or email" required>
         </form>
         <br><hr><br>
-        <h2>A list of the 100 most recent members.</h2>
+        <h2>Highest scoring members:</h2>
         <?php
-            $sql = "SELECT * FROM `users` ORDER BY `user_id` DESC";
+            $sql = "SELECT * FROM `users` ORDER BY `user_points` DESC LIMIT 100";
             $result = mysqli_query($conn, $sql);
             while($row = mysqli_fetch_assoc($result)){
                 if($row['user_type'] == "admin"){
@@ -37,7 +37,8 @@
                 ?>
                 <a style="color: #000;" href="../profile/index.php?id=<?php echo $row['user_id']; ?>">
                 <div class="user_div">
-                    <h3><?php echo $row['user_name']; if($admin==True){echo " <span style='color:red;font-size:12px;'>[ADMIN]</span>";}?></h3>
+                <p style="color:red;"><?php echo $row['user_points']; ?></p>
+                    <h3><?php echo $row['user_name']; if($admin==True){echo " <span style='color:red;font-size:12px;'>[ADMIN]</span>";} ?></h3>
                     <p style="margin-top:10px;"><?php echo $row['user_email']; ?></p>  
                 </div>
                 </as>

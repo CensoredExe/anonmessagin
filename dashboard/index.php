@@ -45,7 +45,7 @@
                     <?php
                     
                     while($row = mysqli_fetch_assoc($result)){
-
+                        
                         if($row['conv_sender'] == $_SESSION['user_id']){
                             $name = $row['conv_recipient'];
                         }else {
@@ -92,6 +92,7 @@
             <ul>
                 <li><a href="../logout">Logout</a></li>
                 <li><a href="../users/index.php">Users</a></li>
+                <li><a href="../leaderboard/">Leaderboard</a></li>
             </ul>
         </div>
     </div>

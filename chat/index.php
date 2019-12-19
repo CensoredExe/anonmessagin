@@ -42,7 +42,7 @@
 <body>
     <div class="main-column">
     <a style="color: #000;text-align:center;" href="../"><h1 style="font-weight:100;margin-bottom:20px;">AnonMessaging</h1></a>
-        <h1 style="font-weight:300;">Conversation with:<u><a style="color: #000;" href="../profile/index.php?id=<?php echo $name; ?>"> <?php echo findName($name); ?></a></u></h1>
+        <h1 style="font-weight:300;">Conversation with: <u><a style="color: #000;" href="../profile/index.php?id=<?php echo $name; ?>"><?php echo findName($name); ?></a></u></h1>
         <br><hr><br>
         <form method="POST">
             <textarea name="msg_content" class="msg_textarea" required placeholder="Enter your message"></textarea>
@@ -110,6 +110,7 @@
             <ul>
                 <li><a href="../logout">Logout</a></li>
                 <li><a href="../users/index.php">Users</a></li>
+                <li><a href="../leaderboard/">Leaderboard</a></li>
             </ul>
         </div>
     </div>

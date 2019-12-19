@@ -1,7 +1,7 @@
 $primary-red: rgb(151, 0, 0);
 $secondary-red: rgb(119, 19, 1);
-$primary-yellow: rgb(199, 199, 199);
-$secondary-yellow: rgb(255, 255, 255);
+$primary-yellow: rgb(136, 221, 214);
+$secondary-yellow: rgb(145, 251, 195);
 
 * {
     box-sizing: border-box;
@@ -13,7 +13,7 @@ body {
     font-family: sans-serif;
     background-attachment: fixed;
     background-size: cover;
-    background-image: linear-gradient(to bottom right, rgb(114, 114, 114), rgb(102, 102, 102));
+    background-image: linear-gradient(to bottom right, rgb(102, 184, 187), rgb(27, 105, 92));
     background-position: center;
 }
 
