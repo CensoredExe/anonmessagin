@@ -39,6 +39,10 @@
             ?>
             <h1 class="user_name" style="font-weight:300;"><?php echo $row['user_name']; ?></h1>
             <p class="user_email"><?php echo $row['user_email']; ?></p>
+            <br>
+            
+            <br>
+            <p><?php echo $row['user_bio']; ?></p>
             <br><hr><br>
             <h3>User Points: <?php echo checkPoints($row['user_id']); ?></h3>
             <br><hr><br>
@@ -49,6 +53,54 @@
         }
     }
     ?>
+    <br><hr><br>
+    <div class="comment-form">
+        <form method="POST">
+            <textarea style="width: 100%;max-width:100%;min-width:100%;font-size:22px;border:2px solid black;padding:10px;" class="comment-area" name="comment-area" placeholder="Comment on this user's profile."></textarea>
+            <button type="submit" name="submit" class="submit-btn">Comment</button>
+        </form>
+        <?php
+        date_default_timezone_set("Europe/London");
+        // Add comments to DB
+        if(isset($_POST['submit'])){
+            $comment_content = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['comment-area']));
+            $date = date("H:i:s d/m/Y");
+            $user_id = $_SESSION['user_id'];
+            $sql = "INSERT INTO `comments` (`comment_profile`, `comment_user`, `comment_content`, `comment_date`) VALUES ('$id', '$user_id', '$comment_content', '$date')";
+            if(mysqli_query($conn, $sql)){
+                addPoints($user_id, 5);
+                addPoints($id, 3);
+                echo "<script>window.location = window.location</script>";
+            }else {
+                ?>
+                ERROR
+                <?php
+            }
+        }
+        ?>
     </div>
+    <br>
+    <?php
+    // Select comments from DB
+    $sql = "SELECT * FROM `comments` WHERE `comment_profile`='$id' ORDER BY `comment_id` DESC LIMIT 100";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_assoc($result)){
+        ?>
+ <div class="comment">
+        <div class="comment-info">
+            <a style="color:#000;text-decoration:none;" href="index.php?id=<?php echo $row['comment_user']; ?>"><h3><?php echo findName($row['comment_user']); ?></h3></a>
+            <p><?php echo $row['comment_date']; ?></p>
+            <p>Points: <?php echo checkPoints($row['comment_user']); ?></p>
+        </div>
+        <div class="comment-content">
+            <p><?php echo $row['comment_content']; ?></p>
+        </div>
+    </div>
+        <?php
+    }
+    ?>
+   
+    </div>
+    
 </body>
 </html>
