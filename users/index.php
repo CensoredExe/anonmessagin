@@ -20,6 +20,7 @@
     <div class="main-column">
     <a style="color: #000;text-align:center;" href="../"><h1 style="font-weight:100;margin-bottom:20px;">AnonMessaging</h1></a>
     <h1>See a list of users, or search for them.</h1>
+    
         <form method="GET" action="search.php">
             <input class="search-bar" type="search" name="search" placeholder="Search for username or email" required>
         </form>
