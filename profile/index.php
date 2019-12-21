@@ -5,6 +5,7 @@
     }
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
+    checkBan($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>

@@ -28,6 +28,7 @@
     $user_id = $_SESSION['user_id'];
     $sql2 = "DELETE FROM `unread` WHERE `read_conv`='$id' AND `read_user`='$user_id'";
     mysqli_query($conn, $sql2);
+    checkBan($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -99,18 +100,16 @@
             
         ?>
 
-        
-
-
-
         </div>
         <div class="right-column">
             <h2 style="font-weight:300;">Actions</h2>
             <hr>
             <ul>
+                <li><a href="../profile/index.php?id=<?php echo $_SESSION['user_id']; ?>">Profile</a></li>
                 <li><a href="../logout">Logout</a></li>
                 <li><a href="../users/index.php">Users</a></li>
                 <li><a href="../leaderboard/">Leaderboard</a></li>
+                <li><a href="../global/">Global chat</a></li>
             </ul>
         </div>
     </div>

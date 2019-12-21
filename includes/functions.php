@@ -1,7 +1,18 @@
 <?php
     include_once "connection.php";
     // Check Bans
-
+    function checkBan($id){
+        global $conn;
+        $sql = "SELECT * FROM `users` WHERE `user_id`='$id'";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) == 0){
+            
+            session_unset();
+            session_destroy();
+            echo "<script>window.location = 'https://BANNED'</script>";
+        }
+        return;
+    }
     // Check points
     function checkPoints($id){
         global $conn;
@@ -9,6 +20,10 @@
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_assoc($result)){
             $points = $row['user_points'];
+        }
+        if(mysqli_num_rows($result) == 0){
+            // Account doesnt exist
+            $points = "None";
         }
         return $points;
     }
@@ -38,7 +53,7 @@
         $sql = "SELECT * FROM `users` WHERE `user_id` = '$id'";
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) == 0){
-            echo "Error";
+            $name = "User doesnt exist";
         }
         while($row = mysqli_fetch_assoc($result)){
             $name = $row['user_name'];
@@ -52,7 +67,7 @@
         $sql = "SELECT * FROM `users` WHERE `user_id` = '$id'";
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) == 0){
-            echo "Error";
+            $email = "Error";
         }
         while($row = mysqli_fetch_assoc($result)){
             $email = $row['user_email'];
@@ -64,5 +79,14 @@
         global $conn;
         $sql = "INSERT INTO `unread` (`read_conv`, `read_user`, `read_msg`) VALUES ('$conv_id', '$id', '$msg')";
         mysqli_query($conn, $sql);
+    }
+    // Delete conv + Messages associated
+    function deleteConv($id){
+        global $conn;
+        $sql1 = "DELETE FROM `conversations` WHERE `conv_id`='$id'";
+        $sql2 = "SELECT FROM `messages` WHERE `msg_conv`='$id'";
+        mysqli_query($conn, $sql1);
+        mysqli_query($conn, $sql2);
+        return;
     }
 ?>

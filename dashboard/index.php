@@ -5,6 +5,7 @@
     }
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
+    checkBan($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,10 @@
             <h1 style="font-weight:300;font-size:50px;">AnonDashboard</h1>
             <p>See new messages or start a conversation.</p>
             <p>Welcome back, <?php echo $_SESSION['user_name']; ?></p>
-            <p>AnonScore: <?php echo checkPoints($_SESSION['user_id']); ?></p><br>
+            <p>AnonScore: <?php echo checkPoints($_SESSION['user_id']); ?></p>
+            <br>
+            <a href="../global/">Global Group Chat</a><br>
+            <br>
             <hr><br>
             
             <?php
@@ -69,9 +73,10 @@
                         }
                         ?>
                         <a style="color:#000;<?php if($unread == True){echo "color:darkblue; !important"; } ?>" href="../chat/index.php?id=<?php echo $row['conv_id']; ?>">
-                        <div class="conversation">
+                        <div style="position:relative;" class="conversation">
                             <h2 style="font-weight:300;"><?php echo findName($name); ?></h2>
                             <p><?php echo findEmail($name); ?></p>
+                            <a style="font-size:12px;color:red;position:absolute;top:5px;right:5px;" onclick="return confirm('Are you sure? This will delete the conversation + all messages in it');" href="deleteconv.php?id=<?php echo $row['conv_id']; ?>">DELETE</a>
                             <?php
                             if($unread == True){
                                 ?>
@@ -90,9 +95,11 @@
             <h2 style="font-weight:300;">Actions</h2>
             <hr>
             <ul>
+                <li><a href="../profile/index.php?id=<?php echo $_SESSION['user_id']; ?>">Profile</a></li>
                 <li><a href="../logout">Logout</a></li>
                 <li><a href="../users/index.php">Users</a></li>
                 <li><a href="../leaderboard/">Leaderboard</a></li>
+                <li><a href="../global/">Global chat</a></li>
             </ul>
         </div>
     </div>
