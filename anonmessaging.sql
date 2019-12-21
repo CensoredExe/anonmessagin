@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2019 at 12:38 PM
--- Server version: 10.3.15-MariaDB
+-- Generation Time: Dec 21, 2019 at 03:58 AM
+-- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.1.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -36,6 +36,20 @@ CREATE TABLE `comments` (
   `comment_date` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `comment_profile`, `comment_user`, `comment_content`, `comment_date`) VALUES
+(1, 8, 5, 'bnvng', '01:02:15 21/12/2019'),
+(2, 8, 5, 'gdfg', '01:02:18 21/12/2019'),
+(3, 7, 5, 'ur gay', '01:18:42 21/12/2019'),
+(4, 5, 5, 'gsgf', '02:17:40 21/12/2019'),
+(5, 5, 5, 'hfghh', '02:17:42 21/12/2019'),
+(6, 5, 5, 'jhggjh', '02:17:43 21/12/2019'),
+(7, 5, 5, 'kjgkjkf', '02:17:45 21/12/2019'),
+(8, 5, 5, 'fkjhfk', '02:17:46 21/12/2019');
+
 -- --------------------------------------------------------
 
 --
@@ -54,10 +68,32 @@ CREATE TABLE `conversations` (
 --
 
 INSERT INTO `conversations` (`conv_id`, `conv_sender`, `conv_recipient`, `most_recent`) VALUES
-(7, 5, 7, 'none'),
-(8, 5, 6, 'none'),
-(9, 7, 6, 'none'),
-(11, 8, 5, 'none');
+(11, 8, 5, 'none'),
+(12, 8, 6, 'none'),
+(13, 5, 6, 'none');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `global`
+--
+
+CREATE TABLE `global` (
+  `msg_id` int(11) NOT NULL,
+  `msg_author` int(11) NOT NULL,
+  `msg_content` longtext NOT NULL,
+  `msg_date` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `global`
+--
+
+INSERT INTO `global` (`msg_id`, `msg_author`, `msg_content`, `msg_date`) VALUES
+(1, 5, 'first global msg', '01:12:49 21/12/2019'),
+(2, 5, 'test', '01:17:22 21/12/2019'),
+(3, 7, 'tsdgg', '01:18:34 21/12/2019'),
+(4, 7, 'gsgsgf', '01:26:56 21/12/2019');
 
 -- --------------------------------------------------------
 
@@ -93,7 +129,29 @@ INSERT INTO `messages` (`msg_id`, `msg_conv`, `msg_author`, `msg_content`, `msg_
 INSERT INTO `messages` (`msg_id`, `msg_conv`, `msg_author`, `msg_content`, `msg_date`) VALUES
 (25, 7, 7, 'youre gay as hell ', '11:19:36 19/12/2019'),
 (26, 8, 5, 'ccording to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don\'t care what humans think is impossible. Yellow, black. Yellow, black. Yellow, black. Yellow, black. Ooh, black and yellow! Let\'s shake it up a little. Barry! Breakfast is ready! Ooming! Hang on a second. Hello? - Barry? - Adam? - Oan you believe this is happening? - I can\'t. I\'ll pick you up. Looking sharp. Use the stairs. Your father paid good money for those. Sorry. I\'m excited. Here\'s the graduate. We\'re very proud of you, son. A perfect report card, all B\'s. Very proud. Ma! I got a thing going here. - You got lint on your fuzz. - Ow! That\'s me! - Wave to us! We\'ll be in row 118,000. - Bye! Barry, I told you, stop flying in the house! - Hey, Adam. - Hey, Barry. - Is that fuzz gel? - A little. Special day, graduation. Never thought I\'d make it. Three days grade school, three days high school. Those were awkward. Three days college. I\'m glad I took a day and hitchhiked around the hive. You did come back different. - Hi, Barry. - Artie, growing a mustache? Looks good. - Hear about Frankie? - Yeah. - You going to the funeral? - No, I\'m not going. Everybody knows, sting someone, you die. Don\'t waste it on a squirrel. Such a hothead. I guess he could have just gotten out of the way. I love', '11:22:45 19/12/2019'),
-(27, 11, 8, 'well gay\r\n', '11:31:07 19/12/2019');
+(27, 11, 8, 'well gay\r\n', '11:31:07 19/12/2019'),
+(28, 12, 8, 'gfdgg', '01:45:35 21/12/2019'),
+(29, 12, 8, 'hfghfhge', '01:45:37 21/12/2019');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suggestions`
+--
+
+CREATE TABLE `suggestions` (
+  `s_id` int(11) NOT NULL,
+  `s_content` longtext NOT NULL,
+  `s_date` varchar(256) NOT NULL,
+  `s_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `suggestions`
+--
+
+INSERT INTO `suggestions` (`s_id`, `s_content`, `s_date`, `s_user`) VALUES
+(1, 'Test suggestion', '02:58:13 21/12/2019', 5);
 
 -- --------------------------------------------------------
 
@@ -107,6 +165,14 @@ CREATE TABLE `unread` (
   `read_user` int(11) NOT NULL,
   `read_msg` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `unread`
+--
+
+INSERT INTO `unread` (`read_id`, `read_conv`, `read_user`, `read_msg`) VALUES
+(12, 12, 6, 'gfdgg'),
+(13, 12, 6, 'hfghfhge');
 
 -- --------------------------------------------------------
 
@@ -130,10 +196,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_bio`, `user_pfp`, `user_type`, `user_points`) VALUES
-(5, 'Oliver Crowe', 'olivercampbellcrowe@outlook.com', '$2y$10$7SGUbtvKLVjBMqQkYIbbtud2FNWhilfzr4mP7DU8fX24YokYl1PgK', 'User hasnt entered a bio', 'uploads/default.png', 'admin', 163),
-(6, 'John Doe', 'newuser@outlook.com', '$2y$10$ANGKXXl0kUFwkccwss9Yd.w9R2zdkZ6k75fqKih9R56VRggRjbiDi', 'User hasnt entered a bio', 'uploads/default.png', 'user', 54),
-(7, 'Jane Doe', 'another@gmail.com', '$2y$10$1tsW8owumjzt07ZsGfmzSuCeW4lVX10lrctrTqH68ZFNUqSAH1Nzq', 'User hasnt entered a bio', 'uploads/default.png', 'user', 55),
-(8, 'censoredexe', 'gkskgd@gmail.com', '$2y$10$IfMNaJV50wSIyGd1GitQ5.LVzPNNzz2iXRNPZqlW1SkCyDcFbJoL2', 'User hasnt entered a bio', 'uploads/default.png', 'user', 10);
+(5, 'Oliver Crowe', 'olivercampbellcrowe@outlook.com', '$2y$10$7SGUbtvKLVjBMqQkYIbbtud2FNWhilfzr4mP7DU8fX24YokYl1PgK', 'User hasnt entered a bio', 'uploads/default.png', 'admin', 241),
+(6, 'John Doe', 'newuser@outlook.com', '$2y$10$ANGKXXl0kUFwkccwss9Yd.w9R2zdkZ6k75fqKih9R56VRggRjbiDi', 'User hasnt entered a bio', 'uploads/default.png', 'user', 62),
+(8, 'censoredexe', 'gkskgd@gmail.com', '$2y$10$IfMNaJV50wSIyGd1GitQ5.LVzPNNzz2iXRNPZqlW1SkCyDcFbJoL2', 'User hasnt entered a bio', 'uploads/default.png', 'user', 28);
 
 --
 -- Indexes for dumped tables
@@ -152,10 +217,22 @@ ALTER TABLE `conversations`
   ADD PRIMARY KEY (`conv_id`);
 
 --
+-- Indexes for table `global`
+--
+ALTER TABLE `global`
+  ADD PRIMARY KEY (`msg_id`);
+
+--
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`msg_id`);
+
+--
+-- Indexes for table `suggestions`
+--
+ALTER TABLE `suggestions`
+  ADD PRIMARY KEY (`s_id`);
 
 --
 -- Indexes for table `unread`
@@ -178,25 +255,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `conv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `conv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `global`
+--
+ALTER TABLE `global`
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `suggestions`
+--
+ALTER TABLE `suggestions`
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `unread`
 --
 ALTER TABLE `unread`
-  MODIFY `read_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `read_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`

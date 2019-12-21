@@ -46,6 +46,19 @@
                 <?php
             }
         ?>
+        <div class="right-column">
+            <h2 style="font-weight:300;">Actions</h2>
+            <hr>
+            <ul>
+            <li><a href="../">Dashboard</a></li>
+                <li><a href="../profile/index.php?id=<?php echo $_SESSION['user_id']; ?>">Profile</a></li>
+                <li><a href="../logout">Logout</a></li>
+                <li><a href="../users/index.php">Users</a></li>
+                <li><a href="../leaderboard/">Leaderboard</a></li>
+                <li><a href="../global/">Global chat</a></li>
+                <li><a href="../suggestions/">Suggestions</a></li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
