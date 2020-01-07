@@ -41,7 +41,6 @@
             $sql = "INSERT INTO `suggestions` (`s_content`, `s_date`, `s_user`) VALUES ('$suggestion', '$date', '$user')";
             if(mysqli_query($conn, $sql)){
                 echo "<p>Suggestion sent, thanks for the feedback.</p>";
-                
             }else {
                 echo "Error, please message an admin you got this error";
             }

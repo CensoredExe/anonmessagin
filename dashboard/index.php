@@ -6,6 +6,7 @@
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
     checkBan($_SESSION['user_id']);
+    $user_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +27,32 @@
             <p>AnonScore: <?php echo checkPoints($_SESSION['user_id']); ?></p>
             <br>
             <a href="../global/">Global Group Chat</a><br>
+            <br>
+            <hr><br>
+            <h2 style="font-weight:100;">Your group chats:</h2>
+            <a href="makegc.php">Make a gc</a><br>
+            
+            <?php
+            $sqlgc = "SELECT * FROM `gc_members` WHERE `g_user`='$user_id'";
+            $resultgc = mysqli_query($conn, $sqlgc);
+            while($row = mysqli_fetch_assoc($resultgc)){
+                // Member of a group chat
+                $g_id = $row['g_gc'];
+                $sqlg = "SELECT * FROM `gc_table` WHERE `g_id`='$g_id' LIMIT 1";
+                $resultg = mysqli_query($conn, $sqlg);
+                while($rowg = mysqli_fetch_assoc($resultg)){
+                    $title = $rowg['g_name'];
+                    $gc_id = $rowg['g_id'];
+                    ?>
+                    <a style="color:#000;<?php if($unread == True){echo "color:darkblue; !important"; } ?>" href="../chat/group.php?id=<?php echo $gc_id; ?>">
+                        <div style="position:relative;" class="conversation">
+                            <h2 style="font-weight:300;"><?php echo $title; ?></h2>
+                        </div>
+                        </a>
+                    <?php
+                }
+            }
+            ?>
             <br>
             <hr><br>
             

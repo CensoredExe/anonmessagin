@@ -60,10 +60,21 @@
         $sql = "SELECT * FROM `global` ORDER BY `msg_id` DESC LIMIT 150";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_assoc($result)){
+            $uid = $row['msg_author'];
+            $sql2 = "SELECT * FROM `users` WHERE `user_id`='$uid'";
+            $result2 = mysqli_query($conn, $sql2);
+            $admin = False;
+            while($row2 = mysqli_fetch_assoc($result2)){
+                if($row2['user_type'] == 'admin'){
+                    $admin = True;
+                }else{
+                    $admin = False;
+                }
+            }
             ?>
     <div class="message">
             <div class="msg-info">
-            <a style="color:#000;" href="../profile/index.php?id=<?php echo $row['msg_author']; ?>"><h3 style="font-weight:300;"><?php echo findName($row['msg_author']); ?></h3></a>
+            <a style="color:#000;" href="../profile/index.php?id=<?php echo $row['msg_author']; ?>"><h3 style="font-weight:300;"><?php echo findName($row['msg_author']); if($admin==True){echo " <span style='color:red;font-size:10px;'>[ADMIN]</span>";} ?></h3></a>
             <p><?php echo $row['msg_date']; ?></p>
             <p>User Points: <?php echo checkPoints($row['msg_author']); ?></p>  
             </div>

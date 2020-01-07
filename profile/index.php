@@ -37,6 +37,12 @@
                 <p style="margin:none;margin-top:-10px;color:red;font-weight:700;">Admin Account</p>
                 <?php
             }
+            if($row['user_id'] == $_SESSION['user_id']){
+                ?>
+                <a href="edit.php">Edit profile</a>
+                <?php
+                
+            }
             ?>
             <h1 class="user_name" style="font-weight:300;"><?php echo $row['user_name']; ?></h1>
             <p class="user_email"><?php echo $row['user_email']; ?></p>
