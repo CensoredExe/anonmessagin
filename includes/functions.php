@@ -89,4 +89,30 @@
         mysqli_query($conn, $sql2);
         return;
     }
+    // Check membership for a groupchat, return True if false membership
+    function falseMembership($user_id, $gc_id){
+        global $conn;
+        $sql = "SELECT * FROM `gc_members` WHERE `g_gc`='$gc_id'"; 
+        $result = mysqli_query($conn, $sql);
+        $membership = True;
+        while($row = mysqli_fetch_assoc($result)){
+            if($user_id == $row['g_user']){
+                $membership = False;
+            }
+        }
+        return $membership;
+    }
+
+    function getID($email){
+        global $conn;
+        $sql = "SELECT * FROM `users` WHERE `user_email` = '$email' LIMIT 1";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) == 0){
+            return 0;
+        }
+        while($row = mysqli_fetch_assoc($result)){
+            $id = $row['user_id'];
+        }
+        return $id;
+    }
 ?>

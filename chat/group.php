@@ -16,9 +16,11 @@
         $name = $row['g_name'];
     }
     $user_id = $_SESSION['user_id'];
-    $sql2 = "DELETE FROM `unread` WHERE `read_conv`='$id' AND `read_user`='$user_id'";
-    mysqli_query($conn, $sql2);
     checkBan($_SESSION['user_id']);
+    if(falseMembership($user_id, $id)){
+        echo "No membership to this groupchat";
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +36,7 @@
     <div class="main-column">
     <a style="color: #000;text-align:center;" href="../"><h1 style="font-weight:100;margin-bottom:20px;">AnonMessaging</h1></a>
         <h1 style="font-weight:300;">Groupchat: <?php echo $name; ?></h1>
+        <p><a href="members.php?id=<?php echo $id; ?>">View and add members</a></p>
         <br><hr><br>
         <form method="POST">
             <textarea name="msg_content" class="msg_textarea" required placeholder="Enter your message"></textarea>

@@ -19,6 +19,10 @@
     $sql2 = "DELETE FROM `unread` WHERE `read_conv`='$id' AND `read_user`='$user_id'";
     mysqli_query($conn, $sql2);
     checkBan($_SESSION['user_id']);
+    if(falseMembership($user_id, $id)){
+        echo "No membership to this groupchat";
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -38,9 +42,46 @@
         <h2>Members:</h2>
         <ul>
             <?php
-            
+            $sql = "SELECT * FROM `gc_members` WHERE `g_gc`='$id'";
+            $result = mysqli_query($conn, $sql);
+            while($row = mysqli_fetch_assoc($result)){
+                ?>
+                <p><a href="../profile/index.php?id=<?php echo $row['g_user']; ?>"><?php echo findName($row['g_user']); ?></a> | <a href="remove_member.php?id=<?php echo $id; ?>&uid=<?php echo $row['g_user']; ?>">remove</a></p>
+                <?php
+            }
             ?>
         </ul>
+        <br><hr><br>
+        <h2>Add a user</h2>
+        <p>To do this, enter their <i>email</i> and click enter.</p>
+        <form method="post">
+            <input type="text" name="add" id="add" placeholder="Enter an email" style="width:100%;border:2px solid green;padding:8px;font-size:22px;border-radius:4px;">
+        </form>
+        <?php
+        if(isset($_POST['add'])){
+            $email = mysqli_real_escape_string($conn, $_POST['add']);
+            if(empty($email)){
+                echo "Error, email field is empty.";
+            }else {
+                $sql = "SELECT * FROM `users` WHERE `user_email`='$email'";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) == 0){
+                    echo "User doesn't exists";
+                    exit();
+                }
+                $uid = getID($email);
+                
+                $sql = "INSERT INTO `gc_members` (`g_gc`, `g_user`) VALUES ('$id', '$uid')";
+                if(mysqli_query($conn, $sql)){
+                    echo "<script>window.location = window.location</script>";  
+                }else {
+                   echo "Error, please contact staff.";
+                }
+            
+                
+            }
+        }
+        ?>
         </div>
         <div class="right-column">
             <h2 style="font-weight:300;">Actions</h2>
