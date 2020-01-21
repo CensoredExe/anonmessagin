@@ -119,8 +119,10 @@
     // Add a log
     function addLog($content){
         global $conn;
-        $content = htmlspecialchars(mysqli_real_escape_string($content));
-        $sql = "INSERT INTO `logs` (`log_data`) VALUES ('$content')";
+        $content = htmlspecialchars(mysqli_real_escape_string($conn, $content));
+        date_default_timezone_set("Europe/London");
+        $date = date("H:i:s d/m/Y");
+        $sql = "INSERT INTO `logs` (`log_data`, `log_date`) VALUES ('$content', '$date')";
         mysqli_query($conn, $sql);
     }
 ?>

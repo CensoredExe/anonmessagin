@@ -63,6 +63,7 @@
             $date = date("H:i:s d/m/Y");
             $sql = "INSERT INTO `messages` (`msg_conv`,`msg_author` , `msg_content`, `msg_date`) VALUES ('$id', '$user_id', '$content', '$date')";
             if(mysqli_query($conn, $sql)){
+                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].")"." sent message: ".$content." to the chat with an ID".$id."");
                 $url = "index.php?id='$id'";
                 addPoints($_SESSION['user_id'], 2);
                 addPoints($name, 1);

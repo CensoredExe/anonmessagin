@@ -22,7 +22,7 @@
     
     $sql = "DELETE FROM `gc_members` WHERE `g_gc`='$id' AND `g_user`='$uid';";
     if(mysqli_query($conn, $sql)){
-        $url = "members.php?id=" + $id;
+        
         echo "<script>window.location = '../dashboard/'</script>";
     }else {
         echo "error";

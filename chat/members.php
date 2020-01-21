@@ -46,7 +46,7 @@
             $result = mysqli_query($conn, $sql);
             while($row = mysqli_fetch_assoc($result)){
                 ?>
-                <p><a href="../profile/index.php?id=<?php echo $row['g_user']; ?>"><?php echo findName($row['g_user']); ?></a> | <a href="remove_member.php?id=<?php echo $id; ?>&uid=<?php echo $row['g_user']; ?>">remove</a></p>
+                <p><a href="../profile/index.php?id=<?php echo $row['g_user']; ?>"><?php echo findName($row['g_user']); ?></a> | <a onclick="return confirm('Are you sure you wish to remove this person from the groupchat?');" href="remove_member.php?id=<?php echo $id; ?>&uid=<?php echo $row['g_user']; ?>">remove</a></p>
                 <?php
             }
             ?>
@@ -73,6 +73,7 @@
                 
                 $sql = "INSERT INTO `gc_members` (`g_gc`, `g_user`) VALUES ('$id', '$uid')";
                 if(mysqli_query($conn, $sql)){
+                    addPoints($user_id, 5);
                     echo "<script>window.location = window.location</script>";  
                 }else {
                    echo "Error, please contact staff.";
@@ -94,6 +95,7 @@
                 <li><a href="../leaderboard/">Leaderboard</a></li>
                 <li><a href="../global/">Global chat</a></li>
                 <li><a href="../suggestions/">Suggestions</a></li>
+                
             </ul>
         </div>
     </div>

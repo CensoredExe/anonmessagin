@@ -36,6 +36,7 @@
                 $sql1 = "INSERT INTO `gc_table` (`g_name`) VALUES ('$gc_title')";
                 if(mysqli_query($conn, $sql1)){
                     // GC Created
+                    addLog($_SESSION['user_email']." (".$_SESSION['user_id'].")"." created groupchat (".$gc_title.")");
                     $user_id = $_SESSION['user_id'];
                     $sql3 = "SELECT * FROM `gc_table` WHERE `g_name`='$gc_title' ORDER BY `g_id` DESC LIMIT 1";
                     $result = mysqli_query($conn, $sql3);
@@ -43,6 +44,7 @@
                         $g_id = $row['g_id'];
                     }
                     $sql2 = "INSERT INTO `gc_members` (`g_gc`, `g_user`) VALUES ('$g_id', '$user_id')";
+                    addPoints($user_id, 10);
                     if(mysqli_query($conn, $sql2)){
                         echo "<script>window.location='index.php'</script>";
                         exit();

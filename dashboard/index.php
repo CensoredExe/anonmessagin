@@ -25,8 +25,17 @@
             <p>See new messages or start a conversation.</p>
             <p>Welcome back, <?php echo $_SESSION['user_name']; ?></p>
             <p>AnonScore: <?php echo checkPoints($_SESSION['user_id']); ?></p>
+            <?php
+            if($_SESSION['user_type'] == 'admin'){
+                ?>  
+                <a href="../mastermind/">Admin Panel</a>
+                <?php
+                
+            }
+            ?>
             <br>
             <a href="../global/">Global Group Chat</a><br>
+            
             <br>
             <hr><br>
             <h2 style="font-weight:100;">Your group chats:</h2>
@@ -38,7 +47,7 @@
             while($row = mysqli_fetch_assoc($resultgc)){
                 // Member of a group chat
                 $g_id = $row['g_gc'];
-                $sqlg = "SELECT * FROM `gc_table` WHERE `g_id`='$g_id' LIMIT 1";
+                $sqlg = "SELECT * FROM `gc_table` WHERE `g_id`='$g_id' ORDER BY `g_id` DESC LIMIT 1";
                 $resultg = mysqli_query($conn, $sqlg);
                 while($rowg = mysqli_fetch_assoc($resultg)){
                     $title = $rowg['g_name'];
@@ -129,6 +138,7 @@
                 <li><a href="../leaderboard/">Leaderboard</a></li>
                 <li><a href="../global/">Global chat</a></li>
                 <li><a href="../suggestions/">Suggestions</a></li>
+                
             </ul>
         </div>
     </div>
