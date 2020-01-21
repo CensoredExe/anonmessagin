@@ -1,10 +1,23 @@
 <?php
     session_start();
     if(!isset($_SESSION['user_id'])){
-        header("Location: ../login");
+        header("../login");
     }
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
+    if(!isset($_GET['id'])){
+        echo "<script>window.location = '../index.php'</script>";
+        exit();
+    }
+    $id = mysqli_real_escape_string($conn, $_GET['id']);
+    $sql = "SELECT * FROM `gc_table` WHERE `g_id`='$id'";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_assoc($result)){
+        $name = $row['g_name'];
+    }
+    $user_id = $_SESSION['user_id'];
+    $sql2 = "DELETE FROM `unread` WHERE `read_conv`='$id' AND `read_user`='$user_id'";
+    mysqli_query($conn, $sql2);
     checkBan($_SESSION['user_id']);
 ?>
 
@@ -20,32 +33,15 @@
 <body>
     <div class="main-column">
     <a style="color: #000;text-align:center;" href="../"><h1 style="font-weight:100;margin-bottom:20px;">AnonMessaging</h1></a>
-    <h1>See a list of users, or search for them.</h1>
-    
-        <form method="GET" action="search.php">
-            <input class="search-bar" type="search" name="search" placeholder="Search for username or email" required>
-        </form>
+        <h1 style="font-weight:300;">Groupchat: <?php echo $name; ?></h1>
         <br><hr><br>
-        <h2>A list of the 100 most recent members.</h2>
-        <?php
-            $sql = "SELECT * FROM `users` ORDER BY `user_id` DESC";
-            $result = mysqli_query($conn, $sql);
-            while($row = mysqli_fetch_assoc($result)){
-                if($row['user_type'] == "admin"){
-                    $admin = True;
-                }else {
-                    $admin = False;
-                }
-                ?>
-                <a style="color: #000;" href="../profile/index.php?id=<?php echo $row['user_id']; ?>">
-                <div class="user_div">
-                    <h3><?php echo $row['user_name']; if($admin==True){echo " <span style='color:red;font-size:12px;'>[ADMIN]</span>";}?></h3>
-                    <p style="margin-top:10px;"><?php echo $row['user_email']; ?></p>  
-                </div>
-                </as>
-                <?php
-            }
-        ?>
+        <h2>Members:</h2>
+        <ul>
+            <?php
+            
+            ?>
+        </ul>
+        </div>
         <div class="right-column">
             <h2 style="font-weight:300;">Actions</h2>
             <hr>

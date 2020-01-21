@@ -22,8 +22,11 @@
     }
     if($_SESSION['user_id'] == $sender){
         $name = $recipient;
-    }else {
+    }else if($_SESSION['user_id'] == $recipient) {
         $name = $sender;
+    }else {
+        echo "Dont try to access stuff you arent allowed!";
+        exit();
     }
     $user_id = $_SESSION['user_id'];
     $sql2 = "DELETE FROM `unread` WHERE `read_conv`='$id' AND `read_user`='$user_id'";
