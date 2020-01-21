@@ -11,11 +11,7 @@
     }
     $id = mysqli_real_escape_string($conn, $_GET['id']);
     $uid = mysqli_real_escape_string($conn, $_GET['uid']);
-    $sql = "SELECT * FROM `gc_table` WHERE `g_id`='$id'";
-    $result = mysqli_query($conn, $sql);
-    while($row = mysqli_fetch_assoc($result)){
-        $name = $row['g_name'];
-    }
+    
     $user_id = $_SESSION['user_id'];
     
     checkBan($_SESSION['user_id']);

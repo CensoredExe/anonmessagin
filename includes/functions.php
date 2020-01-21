@@ -115,4 +115,12 @@
         }
         return $id;
     }
+
+    // Add a log
+    function addLog($content){
+        global $conn;
+        $content = htmlspecialchars(mysqli_real_escape_string($content));
+        $sql = "INSERT INTO `logs` (`log_data`) VALUES ('$content')";
+        mysqli_query($conn, $sql);
+    }
 ?>
