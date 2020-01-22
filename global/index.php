@@ -7,7 +7,7 @@
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
     checkBan($_SESSION['user_id']);
-   
+    addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") opened global group chat ( possible refresh )");
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +42,7 @@
             $user_id = $_SESSION['user_id'];
             $sql = "INSERT INTO `global` (`msg_content`, `msg_author`, `msg_date`) VALUES ('$msg_content', '$user_id', '$date')";
             if(mysqli_query($conn, $sql)){
+                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") sent message to global: ".$msg_content);
                 addPoints($_SESSION['user_id'], 2);
                 echo "<script>window.location=window.location</script>";
             }else {
@@ -76,7 +77,8 @@
             <div class="msg-info">
             <a style="color:#000;" href="../profile/index.php?id=<?php echo $row['msg_author']; ?>"><h3 style="font-weight:300;"><?php echo findName($row['msg_author']); if($admin==True){echo " <span style='color:red;font-size:10px;'>[ADMIN]</span>";} ?></h3></a>
             <p><?php echo $row['msg_date']; ?></p>
-            <p>User Points: <?php echo checkPoints($row['msg_author']); ?></p>  
+            <p>User Points: <?php echo checkPoints($row['msg_author']); ?></p>
+            <a href="delete.php?id=<?php echo $row['msg_id']; ?>" style="font-size:8px;color:red;margin-top:-5px;padding:0;">DELETE</a>
             </div>
             
             <div class="msg-content"?>

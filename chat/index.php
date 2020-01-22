@@ -24,6 +24,8 @@
         $name = $recipient;
     }else if($_SESSION['user_id'] == $recipient) {
         $name = $sender;
+    }else if ($_SESSION['user_type'] == 'admin'){
+        $name = $recipient;
     }else {
         echo "Dont try to access stuff you arent allowed!";
         exit();
@@ -32,6 +34,7 @@
     $sql2 = "DELETE FROM `unread` WHERE `read_conv`='$id' AND `read_user`='$user_id'";
     mysqli_query($conn, $sql2);
     checkBan($_SESSION['user_id']);
+    addLog($_SESSION['user_email']." (".$_SESSION['user_id'].")"." opened ( possible refresh ) the chat with an ID: ".$id."");
 ?>
 
 <!DOCTYPE html>
@@ -63,15 +66,12 @@
             $date = date("H:i:s d/m/Y");
             $sql = "INSERT INTO `messages` (`msg_conv`,`msg_author` , `msg_content`, `msg_date`) VALUES ('$id', '$user_id', '$content', '$date')";
             if(mysqli_query($conn, $sql)){
-                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].")"." sent message: ".$content." to the chat with an ID".$id."");
+                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].")"." sent message: ".$content." to the chat with an ID: ".$id."");
                 $url = "index.php?id='$id'";
                 addPoints($_SESSION['user_id'], 2);
                 addPoints($name, 1);
                 addUnread($name, $id , $content);
                 echo "<script>window.location= window.location</script>";
-                
-                
-            
             }else {
                 echo "Error.";
             }

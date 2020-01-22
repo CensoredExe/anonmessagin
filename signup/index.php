@@ -1,9 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION['user_id'])){
-        // Already logged in
-        header("Location: ../dashboard/");
-    }
+    
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
 ?>
@@ -64,7 +61,13 @@
                     // Account doesnt exist
                     $sql = "INSERT INTO `users` (`user_email`, `user_name`, `user_password`,`user_bio`, `user_pfp`, `user_type`, `user_points`) VALUES ('$user_email', '$user_name', '$hash', 'User hasnt entered a bio', 'uploads/default.png', 'user', '0');";
                     if(mysqli_query($conn, $sql)){
-                        echo "Account made";
+                        echo "Account made, login by clicking the button above";
+                        if(isset($_GET['ref'])){
+                            $ref = mysqli_real_escape_string($conn, $_GET['ref']);
+                            addPoints($ref, 35);
+                            addLog($ref."  invited a user with the user email: ".$user_email);
+                        }
+                        addLog("Account made with email: ".$user_email);
                     }else {
                         echo "Error, account not made.";
                     }

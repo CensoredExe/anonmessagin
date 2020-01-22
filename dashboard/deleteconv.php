@@ -25,9 +25,11 @@
         while($row = mysqli_fetch_assoc($result)){
             if($user_id == $row['conv_sender']){
                 deleteConv($id);
+                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") deleted conversation with ID: ".$id." - Conversation was with uid: ".$row['conv_recipient']);
                 echo "<script>window.location='../'</script>";
             }else if ($user_id == $row['conv_recipient']){
                 deleteConv($id);
+                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") deleted conversation with ID: ".$id." - Conversation was with uid: ".$row['conv_sender']);
                 echo "<script>window.location='../'</script>";
             }else {
                 echo "You dont have perms";

@@ -23,16 +23,10 @@
 <body>
     <div class="main-column">
         <div class="introduction">
-            <h1 style="font-weight:300;">Admin Panel - Mastermind</h1>
+            <h1 style="font-weight:300;"><a style="color:#000;text-decoration:none" href="index.php">Admin Panel - Mastermind</a></h1>
             <br><hr><br>
-            <h3>What do you wish to do?</h3>
-            <ul>
-                <li><a href="logs.php">Logs</a></li>
-                <li><a href="suggestions.php">Suggestions</a></li>
-                <li><a href="search.php">Search a UID</a></li>
-                <li><a href="guide.php">Staff guide</a></li>
-                <li><a href="addPoints.php">Add points</a></li>
-            </ul>
+            <p>Only rules are Harrasment and any form of child pornography distribution, including but not limited to the sale there of.<br>Always attempt to message an individual for harrasment rule breaks, however for child pornorgrapy, ban them.</p>
+            <p>Aswell as this, if someone is spamming the Global chat, message them a warning, or ban them as you see appropriately. Everything is logged, and I will check all bans you make, if one is innapropriate, you will be banned and removed from staff.</p>
         </div>
         <div class="right-column">
             <h2 style="font-weight:300;">Actions</h2>
@@ -45,6 +39,7 @@
                 <li><a href="../leaderboard/">Leaderboard</a></li>
                 <li><a href="../global/">Global chat</a></li>
                 <li><a href="../suggestions/">Suggestions</a></li>
+                
             </ul>
         </div>
     </div>

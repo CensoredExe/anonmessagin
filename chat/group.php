@@ -21,6 +21,8 @@
         echo "No membership to this groupchat";
         exit();
     }
+    addLog($_SESSION['user_email']." (".$_SESSION['user_id'].")"." opened ( possible refresh ) the group chat with an ID: ".$id."");
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +55,8 @@
             $date = date("H:i:s d/m/Y");
             $sql = "INSERT INTO `gc_messages` (`msg_conv`,`msg_author` , `msg_content`, `msg_date`) VALUES ('$id', '$user_id', '$content', '$date')";
             if(mysqli_query($conn, $sql)){
-                $url = "index.php?id='$id'";
+                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].")"." sent message: ".$content." to the group chat with an ID: ".$id."");
+                
                 addPoints($_SESSION['user_id'], 2);
                 echo "<script>window.location= window.location</script>";
                 

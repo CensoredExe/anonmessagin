@@ -46,6 +46,24 @@
             echo "Error";
         }
     }
+    // Subtract Points
+    function subtractPoints($id, $points){
+        global $conn;
+
+        $sql = "SELECT * FROM `users` WHERE `user_id` = '$id'";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+            $pointscurrent = $row['user_points'];
+        }
+        $points = $pointscurrent - $points;
+
+        $sql = "UPDATE `users` SET `user_points`='$points' WHERE `user_id`='$id'";
+        if(mysqli_query($conn, $sql)){
+            // Success, points added.
+        }else {
+            echo "Error";
+        }
+    }
 
     // Find username
     function findName($id){

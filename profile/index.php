@@ -6,6 +6,8 @@
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
     checkBan($_SESSION['user_id']);
+    $idlog = mysqli_real_escape_string($conn, $_GET['id']);
+    addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") opened profile page for ID: ".$idlog);
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +45,11 @@
                 <?php
                 
             }
+            if($_SESSION['user_type'] == 'admin'){
+                ?>
+                <a style="color:red;font-weight:700;" href="ban.php?id=<?php echo $row['user_id']; ?>" onclick="return confirm('Are you sure?');">BAN</a>
+                <?php
+            }
             ?>
             <h1 class="user_name" style="font-weight:300;"><?php echo $row['user_name']; ?></h1>
             <p class="user_email"><?php echo $row['user_email']; ?></p>
@@ -77,6 +84,7 @@
             if(mysqli_query($conn, $sql)){
                 addPoints($user_id, 5);
                 addPoints($id, 3);
+                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") commented on user's profile. user uid: ".$id);
                 echo "<script>window.location = window.location</script>";
             }else {
                 ?>

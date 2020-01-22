@@ -5,6 +5,12 @@
     }
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
+    if(!isset($_GET['search'])){
+        echo "<script>window.location = 'index.php'</script>";
+        exit();
+    }
+    $searchlog = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search']));
+    addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") searched for a user with query: ".$searchlog);
 ?>
 
 <!DOCTYPE html>

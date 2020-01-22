@@ -6,6 +6,7 @@
     include_once "../includes/connection.php";
     include_once "../includes/functions.php";
     checkBan($_SESSION['user_id']);
+    addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") opened suggestions page");
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +41,7 @@
             $date = date("H:i:s d/m/Y");
             $sql = "INSERT INTO `suggestions` (`s_content`, `s_date`, `s_user`) VALUES ('$suggestion', '$date', '$user')";
             if(mysqli_query($conn, $sql)){
+                addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") sent a suggestion");
                 echo "<p>Suggestion sent, thanks for the feedback.</p>";
             }else {
                 echo "Error, please message an admin you got this error";

@@ -7,6 +7,7 @@
     include_once "../includes/functions.php";
     checkBan($_SESSION['user_id']);
     $user_id = $_SESSION['user_id'];
+    addLog($_SESSION['user_email']." (".$_SESSION['user_id'].") opened dashboard ( possible refresh )");
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@
             <h1 style="font-weight:300;font-size:50px;">AnonDashboard</h1>
             <p>See new messages or start a conversation.</p>
             <p>Welcome back, <?php echo $_SESSION['user_name']; ?></p>
-            <p>AnonScore: <?php echo checkPoints($_SESSION['user_id']); ?></p>
+            <p>AnonScore: <?php echo checkPoints($_SESSION['user_id']); ?></p><br><hr><br>
             <?php
             if($_SESSION['user_type'] == 'admin'){
                 ?>  
@@ -33,8 +34,15 @@
                 
             }
             ?>
-            <br>
-            <a href="../global/">Global Group Chat</a><br>
+            <h2 style="font-weight:300;">Invite your friends and receive AnonPoints in return</h4>
+            <p>Email or text this link to all your friends to earn!</p>
+            <?php
+            $uid = $_SESSION['user_id'];
+            $link = "http://anonmessaging.com/signup/index.php?ref=".$uid;
+            ?>  
+            <a href="<?php echo $link ?>"><?php echo $link ?></a>
+            <br><br>
+            <a href="../global/" style="font-size:20px;border:2px solid red;padding:5px;">Global Group Chat</a><br>
             
             <br>
             <hr><br>

@@ -23,16 +23,40 @@
 <body>
     <div class="main-column">
         <div class="introduction">
-            <h1 style="font-weight:300;">Admin Panel - Mastermind</h1>
+            <h1 style="font-weight:300;"><a style="color:#000;text-decoration:none" href="index.php">Admin Panel - Mastermind</a></h1>
             <br><hr><br>
-            <h3>What do you wish to do?</h3>
-            <ul>
-                <li><a href="logs.php">Logs</a></li>
-                <li><a href="suggestions.php">Suggestions</a></li>
-                <li><a href="search.php">Search a UID</a></li>
-                <li><a href="guide.php">Staff guide</a></li>
-                <li><a href="addPoints.php">Add points</a></li>
-            </ul>
+            <form method="POST">
+                <input name="search" type="search" placeholder="Enter a user ID" required>
+            </form>
+            <?php
+            if(isset($_POST['search'])){
+                $id = $_POST['search'];
+                $sql = "SELECT * FROM `users` WHERE `user_id`='$id' LIMIT 1";
+                $result = mysqli_query($conn, $sql);
+                ?>
+                <table style="width: 100%;" border="1">
+                <thead>
+                    
+                    <th>User</th>
+                    <th>Link</th>
+                </thead>
+                <tbody>
+                    <?php
+                    while($row = mysqli_fetch_assoc($result)){
+                        ?>
+                        <tr style="max-height:20px;overflow:auto;max-width:100%;">
+                            
+                            <td><?php echo findName($row['user_id']); ?></td>
+                            <td><a href="../profile/index.php?id=<?php echo $row['user_id']; ?>">Profile</a></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+                <?php
+            }
+            ?>
         </div>
         <div class="right-column">
             <h2 style="font-weight:300;">Actions</h2>
@@ -45,6 +69,7 @@
                 <li><a href="../leaderboard/">Leaderboard</a></li>
                 <li><a href="../global/">Global chat</a></li>
                 <li><a href="../suggestions/">Suggestions</a></li>
+                
             </ul>
         </div>
     </div>
